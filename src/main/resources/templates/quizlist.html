@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Quizlist</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+    <h1>Quizlist</h1>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Description</th> <!-- descriptions will be formatted better later-->
+            <th>Course code</th>
+            <th>Publication status</th>
+            <th>Category</th>
+        </tr>
+        <tr th:each="quiz : ${quizzes}">
+            <td th:text="${quiz.name}"></td>
+            <td th:text="${quiz.description}"></td>
+            <td th:text="${quiz.courseCode}"></td>
+            <td th:text="${quiz.published}"></td>
+            <td th:text="${quiz.category.name}"></td>
+            <td><a th:href="@{/delete/{id}(id=${quiz.id})}">Delete</a></td>
+            <td><a th:href="@{/edit/{id}(id=${quiz.id})}">Edit</a></td>
+            <!-- delete and edit buttons later-->
+
+
+        </tr>
+    </table>
+    <a class="btn btn-success" href="/create">Create Book</a>
+
+</body>
