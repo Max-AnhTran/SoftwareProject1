@@ -11,8 +11,6 @@ import haaga_helia.fi.SoftwareProject1.domain.QuizRepository;
 import haaga_helia.fi.SoftwareProject1.domain.CategoryRepository;
 import haaga_helia.fi.SoftwareProject1.domain.Quiz;
 import haaga_helia.fi.SoftwareProject1.domain.Category;
-import haaga_helia.fi.SoftwareProject1.domain.AppUser;
-import haaga_helia.fi.SoftwareProject1.domain.AppUserRepository;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;	
 
 @SpringBootApplication
@@ -27,16 +25,12 @@ public class SoftwareProject1Application extends SpringBootServletInitializer{
 	}
 
 	@Bean
-	public CommandLineRunner demo(QuizRepository qrepository, CategoryRepository crepository, AppUserRepository arepository) {
+	public CommandLineRunner demo(QuizRepository qrepository, CategoryRepository crepository) {
 		return (args) -> {
 			Category category1 = new Category("example", "example");
 			crepository.save(category1);
 			Quiz quiz1 = new Quiz("example", "something", "who-cares", false, category1);
 			qrepository.save(quiz1);
-			AppUser teacherUser = new AppUser("Teacher", AppUser.Role.TEACHER);
-			AppUser studentUser = new AppUser("Student", AppUser.Role.STUDENT);
-			arepository.save(teacherUser);
-			arepository.save(studentUser);
 		};
 	}
 

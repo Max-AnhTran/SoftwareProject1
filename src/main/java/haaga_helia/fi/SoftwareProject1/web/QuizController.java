@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import haaga_helia.fi.SoftwareProject1.domain.QuizRepository;
-import haaga_helia.fi.SoftwareProject1.domain.AppUserRepository;
 import haaga_helia.fi.SoftwareProject1.domain.CategoryRepository;
 import haaga_helia.fi.SoftwareProject1.domain.Quiz;
 
@@ -30,8 +29,6 @@ public class QuizController {
     @Autowired
     private CategoryRepository crepository;
 
-    @Autowired
-    private AppUserRepository arepository;
 
     @RequestMapping(value = {"/quizzes", "/",})
     public String quizList(Model model) { 
@@ -63,12 +60,6 @@ public class QuizController {
         model.addAttribute("quiz", qrepository.findById(id));
         model.addAttribute("categories", crepository.findAll());
         return "editquiz";
-    }
-    @PostMapping("/setrole")
-    public String postMethodName(@RequestBody String entity) {
-        //TODO: process POST request
-        
-        return entity;
     }
     
     

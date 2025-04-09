@@ -7,5 +7,9 @@
 </head>
 <body>
     <h1>Please, select your role</h1>
-    <form action></form>
+    <form th:action="@{/setrole}" method="post">
+        <label>TEACHER<input type="radio" value="TEACHER" required></label>
+        <label>STUDENT<input type="radio" value="STUDENT" required></label>
+        <button type="submit">Continue</button>
+    </form>
 </body>
