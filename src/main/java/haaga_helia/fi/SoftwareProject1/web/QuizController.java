@@ -1,22 +1,19 @@
 package haaga_helia.fi.SoftwareProject1.web;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import haaga_helia.fi.SoftwareProject1.domain.QuizRepository;
 import haaga_helia.fi.SoftwareProject1.domain.CategoryRepository;
+import haaga_helia.fi.SoftwareProject1.domain.Category;
 import haaga_helia.fi.SoftwareProject1.domain.Quiz;
 
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 
 
@@ -36,21 +33,22 @@ public class QuizController {
         return "quizlist";
     }
 
-    @RequestMapping("/create") //alter later
+    @RequestMapping("/createquiz") //alter later
     public String createQuiz(Model model) {
         model.addAttribute("quiz", new Quiz());
         model.addAttribute("categories", crepository.findAll());
         //UNFINISHED, IGNORE UNTIL THYMELEAF TEMPLATES ADDED
         return "createquiz";
     }
-    @PostMapping("/save")
+    @PostMapping("/savequiz")
     public String saveQuiz(Quiz quiz) {
         qrepository.save(quiz);
         return "redirect:quizzes";
         //should redirect to the default page
     }
+    
     //experimental
-    @GetMapping("/delete/{id}")
+    @GetMapping("/delete/{id}") //edit to be deletemapping
     public String deleteQuiz(@PathVariable("id") Long id, Model model) {
         qrepository.deleteById(id);
         return "redirect:../quizzes";
@@ -60,7 +58,18 @@ public class QuizController {
         model.addAttribute("quiz", qrepository.findById(id));
         model.addAttribute("categories", crepository.findAll());
         return "editquiz";
+    }@RequestMapping("/createcategory")
+    public String addCategory(Model model) {
+        model.addAttribute("category",new Category());
+        return "createcategory";
     }
+    
+    @PostMapping("/savecategory")
+    public String saveCategory(Category category) {
+        crepository.save(category);
+        return "redirect:quizzes";
+    }
+    
     
     
     

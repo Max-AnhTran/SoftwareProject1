@@ -9,7 +9,7 @@
 <body>
     <h1>Create a quiz</h1>
     <div>
-        <form th:object="${quiz}" th:action="@{save}" action="#" method="post">
+        <form th:object="${quiz}" th:action="@{savequiz}" action="#" method="post">
             <label for="name">Name</label>
             <input type="text" id="name" th:field="*{name}" />
             <div style="clear: both; display: block; height: 10px;"></div>
