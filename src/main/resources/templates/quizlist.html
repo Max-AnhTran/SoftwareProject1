@@ -21,14 +21,14 @@
             <td th:text="${quiz.courseCode}"></td>
             <td th:text="${quiz.published} ? 'Published' : 'Not published'"></td>
             <td th:text="${quiz.category.name}"></td>
-            <td><a th:href="@{/delete/{id}(id=${quiz.id})}">Delete</a></td>
-            <td><a th:href="@{/edit/{id}(id=${quiz.id})}">Edit</a></td>
+            <td><a th:href="@{/quizzes/delete/{id}(id=${quiz.id})}">Delete</a></td>
+            <td><a th:href="@{/quizzes/edit/{id}(id=${quiz.id})}">Edit</a></td>
 
 
         </tr>
     </table>
-    <a class="btn btn-success" href="/createquiz">Create Quiz</a>
-    <a class="btn btn-success" href="/createcategory">Create Category</a>
+    <a th:href="@{/quizzes/createquiz}">Create Quiz</a>
+    <a th:href="@{/createcategory}">Create Category</a>
 
 
 </body>

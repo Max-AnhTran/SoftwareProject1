@@ -11,7 +11,6 @@ import haaga_helia.fi.SoftwareProject1.domain.Quiz;
 import haaga_helia.fi.SoftwareProject1.domain.Question;
 import haaga_helia.fi.SoftwareProject1.domain.QuestionRepository;
 import haaga_helia.fi.SoftwareProject1.domain.AnswerOption;
-import haaga_helia.fi.SoftwareProject1.domain.AnswerOptionRepository;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -20,12 +19,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestBody;
-
-
-
 
 @Controller
 public class QuizController {
@@ -48,29 +41,30 @@ public class QuizController {
         return "quizlist";
     }
 
-    @RequestMapping("/createquiz") 
+    @RequestMapping("quizzes/createquiz") 
     public String createQuiz(Model model) {
         model.addAttribute("quiz", new Quiz());
         model.addAttribute("categories", categoryRepository.findAll());
         return "createquiz";
     }
-    @PostMapping("/savequiz")
+    @PostMapping("quizzes/savequiz")
     public String saveQuiz(Quiz quiz) {
         quizRepository.save(quiz);
-        return "redirect:quizzes";
+        return "redirect:/quizzes";
     }
     
-    @GetMapping("/delete/{id}") 
+    @GetMapping("quizzes/delete/{id}") 
     public String deleteQuiz(@PathVariable("id") Long id, Model model) {
         quizRepository.deleteById(id);
-        return "redirect:../quizzes";
+        return "redirect:/quizzes";
     }
-    @GetMapping("/edit/{id}")
+    @GetMapping("quizzes/edit/{id}")
     public String editQuiz(@PathVariable("id") Long id, Model model) {
         model.addAttribute("quiz", quizRepository.findById(id));
         model.addAttribute("categories", categoryRepository.findAll());
         return "editquiz";
-    }@RequestMapping("/createcategory")
+    }
+    @RequestMapping("/createcategory")
     public String addCategory(Model model) {
         model.addAttribute("category",new Category());
         return "createcategory";
@@ -81,6 +75,8 @@ public class QuizController {
         categoryRepository.save(category);
         return "redirect:quizzes";
     }
+
+    //BOTH CATEGORY END POINTS SHOULD BE CHANGED
     @RequestMapping("quizzes/{id}/questions")
     public String questionList(@PathVariable("id") Long quizId, Model model) {
         Quiz quiz = quizRepository.findById(quizId).orElse(null);
