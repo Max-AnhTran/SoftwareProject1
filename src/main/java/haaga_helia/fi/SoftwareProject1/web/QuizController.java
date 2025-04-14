@@ -42,7 +42,7 @@ public class QuizController {
     @Autowired
     private AnswerOptionRepository answerOptionRepository;
 
-    @RequestMapping(value = {"/quizzes", "/",})
+    @RequestMapping(value = {"/quizzes", "/", "/index"})
     public String quizList(Model model) { 
         model.addAttribute("quizzes", quizRepository.findAll());
         return "quizlist";
@@ -145,6 +145,14 @@ public class QuizController {
 
         answerOption.setQuestion(question);
         answerOptionRepository.save(answerOption);
+        return "redirect:/quizzes/" + quizId + "/questions/" + questionId + "/answers";
+    }
+    
+    @GetMapping("/quizzes/{quizId}/questions/{questionId}/answers/delete/{answerId}")
+    public String deleteAnswerOption(@PathVariable Long quizId,
+            @PathVariable Long questionId,
+            @PathVariable Long answerId) {
+        answerOptionRepository.deleteById(answerId);
         return "redirect:/quizzes/" + quizId + "/questions/" + questionId + "/answers";
     }
     
