@@ -10,7 +10,7 @@ import jakarta.persistence.*;
 public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long categoryid;
+    private Long categoryid;
     private String name, description;
     public Category() {
 
@@ -20,10 +20,10 @@ public class Category {
         this.name = name;
         this.description = description;
     }
-    public long getCategoryid() {
+    public Long getCategoryid() {
         return categoryid;
     }
-    public void setCategoryid(long id) {
+    public void setCategoryid(Long id) {
         this.categoryid = id;
     }
     public String getName() {

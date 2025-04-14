@@ -1,17 +1,21 @@
 package haaga_helia.fi.SoftwareProject1.domain;
 
 
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.*;
 @Entity
 public class Quiz {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private Long id;
     private String name, description, courseCode;
     private Boolean published;
 
     //join columns and maybe change it from long to category, which will be defined later
-    private long teacher_id;
+    private Long teacher_id;
     @ManyToOne
     @JoinColumn(name = "categoryid")
     private Category category;
@@ -27,7 +31,7 @@ public class Quiz {
         this.published = published;
         this.category = category;
     }
-    public long getId() {
+    public Long getId() {
         return id;
     }
     public void setId(long id) {
@@ -57,7 +61,7 @@ public class Quiz {
     public void setPublished(Boolean published) {
         this.published = published;
     }
-    public long getTeacher_id() {
+    public Long getTeacher_id() {
         return teacher_id;
     }
     public void setTeacher_id(long teacher_id) {
@@ -69,7 +73,18 @@ public class Quiz {
     public void setCategory(Category category) {
         this.category = category;
     }
+    @JsonIgnore
+    @OneToMany(mappedBy = "quiz")
+    private List<Question> questions;
+
+    public List<Question> getQuestions() {
+        return questions;
+    }
+    public void setQuestions(List<Question> questions) {
+        this.questions = questions;
+    }
     
+
     
 
 }

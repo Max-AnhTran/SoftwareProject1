@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Create Category</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+    <h1>
+        <form th:object="${question}" th:action="@{/quizzes/{id}/questions/savequestion(id=${quiz.id})}" action="#" method="post">
+            <label for="content">Content</label>
+            <input type="text" id="content" th:field="*{content}" />
+            <div style="clear: both; display: block; height: 10px;"></div>
+
+            <label for="difficulty">Difficulty</label>
+            <select id="difficulty" th:field="*{difficulty}">
+                <option value="" disabled selected>Select difficulty</option>
+                <option th:value="EASY">Easy</option>
+                <option th:value="NORMAL">Normal</option>
+                <option th:value="HARD">Hard</option>
+            </select>
+            <div style="clear: both; display: block; height: 10px;"></div>
+            <input type="submit" value="Save"></input>
+
+        </form>
+    </h1>
+</body>

@@ -16,14 +16,13 @@
             <th>Category</th>
         </tr>
         <tr th:each="quiz : ${quizzes}">
-            <td th:text="${quiz.name}"></td>
+            <td><a th:href="@{/quizzes/{id}/questions(id=${quiz.id})}" th:text="${quiz.name}"></a></td>
             <td th:text="${quiz.description}"></td>
             <td th:text="${quiz.courseCode}"></td>
-            <td th:text="${quiz.published}"></td>
+            <td th:text="${quiz.published} ? 'Published' : 'Not published'"></td>
             <td th:text="${quiz.category.name}"></td>
             <td><a th:href="@{/delete/{id}(id=${quiz.id})}">Delete</a></td>
             <td><a th:href="@{/edit/{id}(id=${quiz.id})}">Edit</a></td>
-            <!-- delete and edit buttons later-->
 
 
         </tr>
