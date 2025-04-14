@@ -48,22 +48,19 @@ public class QuizController {
         return "quizlist";
     }
 
-    @RequestMapping("/createquiz") //alter later
+    @RequestMapping("/createquiz") 
     public String createQuiz(Model model) {
         model.addAttribute("quiz", new Quiz());
         model.addAttribute("categories", categoryRepository.findAll());
-        //UNFINISHED, IGNORE UNTIL THYMELEAF TEMPLATES ADDED
         return "createquiz";
     }
     @PostMapping("/savequiz")
     public String saveQuiz(Quiz quiz) {
         quizRepository.save(quiz);
         return "redirect:quizzes";
-        //should redirect to the default page
     }
     
-    //experimental
-    @GetMapping("/delete/{id}") //edit to be deletemapping
+    @GetMapping("/delete/{id}") 
     public String deleteQuiz(@PathVariable("id") Long id, Model model) {
         quizRepository.deleteById(id);
         return "redirect:../quizzes";
