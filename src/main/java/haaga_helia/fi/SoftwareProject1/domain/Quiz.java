@@ -1,90 +1,52 @@
 package haaga_helia.fi.SoftwareProject1.domain;
 
+import lombok.*;
 
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+// import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
+
 @Entity
+@Table(name = "quizzes")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Quiz {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name, description, courseCode;
-    private Boolean published;
 
-    //join columns and maybe change it from long to category, which will be defined later
-    private Long teacher_id;
+    @Column(nullable = false, length = 100)
+    @NotBlank(message = "Quiz name is required")
+    private String name;
+
+    @Column(length = 255)
+    private String description;
+
+    @Column(nullable = false, length = 20)
+    @NotBlank(message = "Course code is required")
+    private String courseCode;
+
+    @Column(nullable = false)
+    private boolean published;
+
     @ManyToOne
-    @JoinColumn(name = "categoryid")
+    @JoinColumn(name = "category_id")
     private Category category;
-    public Quiz() {
 
-    }
-    public Quiz(String name, String description, String courseCode, Boolean published, 
-            Category category) {
-        super();
-        this.name = name;
-        this.description = description;
-        this.courseCode = courseCode;
-        this.published = published;
-        this.category = category;
-    }
-    public Long getId() {
-        return id;
-    }
-    public void setId(long id) {
-        this.id = id;
-    }
-    public String getName() {
-        return name;
-    }
-    public void setName(String name) {
-        this.name = name;
-    }
-    public String getDescription() {
-        return description;
-    }
-    public void setDescription(String description) {
-        this.description = description;
-    }
-    public String getCourseCode() {
-        return courseCode;
-    }
-    public void setCourseCode(String courseCode) {
-        this.courseCode = courseCode;
-    }
-    public Boolean getPublished() {
-        return published;
-    }
-    public void setPublished(Boolean published) {
-        this.published = published;
-    }
-    public Long getTeacher_id() {
-        return teacher_id;
-    }
-    public void setTeacher_id(long teacher_id) {
-        this.teacher_id = teacher_id;
-    }
-    public Category getCategory() {
-        return category;
-    }
-    public void setCategory(Category category) {
-        this.category = category;
-    }
-    @JsonIgnore
-    @OneToMany(mappedBy = "quiz")
+    @OneToMany(mappedBy = "quiz", cascade = CascadeType.ALL)
     private List<Question> questions;
 
-    public List<Question> getQuestions() {
-        return questions;
-    }
-    public void setQuestions(List<Question> questions) {
-        this.questions = questions;
-    }
-    
+    // @OneToMany(mappedBy = "quiz", cascade = CascadeType.ALL)
+    // @JsonIgnore
+    // private List<Review> reviews;
 
-    
-
+    @Override
+    public String toString() {
+        return "Quiz{id=" + id + ", name='" + name + "'}"; // Avoid referencing other entities here
+    }
 }

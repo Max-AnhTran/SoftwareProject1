@@ -1,53 +1,44 @@
 package haaga_helia.fi.SoftwareProject1.domain;
 
+import lombok.*;
+
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 
 @Entity
+@Table(name = "categories")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Category {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long categoryid;
-    private String name, description;
-    public Category() {
 
-    }
-    public Category(String name, String description) {
-        super();
-        this.name = name;
-        this.description = description;
-    }
-    public Long getCategoryid() {
-        return categoryid;
-    }
-    public void setCategoryid(Long id) {
-        this.categoryid = id;
-    }
-    public String getName() {
-        return name;
-    }
-    public void setName(String name) {
-        this.name = name;
-    }
-    public String getDescription() {
-        return description;
-    }
-    public void setDescription(String description) {
-        this.description = description;
-    }
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(nullable = false, unique = true, length = 100)
+    @NotBlank(message = "Category name is required")
+    private String name;
+
+    @Column(length = 255)
+    private String description;
+
     @JsonIgnore
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "category")
+    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
     private List<Quiz> quizzes;
 
-    public List<Quiz> getQuizzes() {
-        return quizzes;
+    public Category(String name, String description) {
+        this.name = name;
+        this.description = description;
     }
-    public void setQuizzes(List<Quiz> quizzes) {
-        this.quizzes = quizzes;
+
+    @Override
+    public String toString() {
+        return "Category{id=" + id + ", name='" + name + "'}";
     }
-    
-    
 }
