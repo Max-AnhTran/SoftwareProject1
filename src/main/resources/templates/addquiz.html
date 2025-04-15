@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
     <head>
         <meta charset="UTF-8" />
-        <title>Edit Quiz</title>
+        <title>Add New Quiz</title>
         <link
             href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
             rel="stylesheet"
@@ -27,12 +27,10 @@
     <body>
         <div class="container mt-4">
             <div class="d-flex justify-content-between align-items-center mb-4">
-                <h1>Edit Quiz</h1>
+                <h1>Add New Quiz</h1>
             </div>
 
             <form th:action="@{/savequiz}" th:object="${quiz}" method="post">
-                <input type="hidden" th:field="*{id}" />
-
                 <div class="mb-3">
                     <label for="name" class="form-label">Quiz Name</label>
                     <input
@@ -80,7 +78,6 @@
                             th:each="category : ${categories}"
                             th:value="${category.id}"
                             th:text="${category.name}"
-                            th:selected="${quiz.category != null and quiz.category.id == category.id}"
                         ></option>
                     </select>
                 </div>
@@ -92,19 +89,18 @@
                         id="published"
                         th:field="*{published}"
                     >
-                        <option value="true" th:selected="${quiz.published}">
-                            Yes
-                        </option>
-                        <option value="false" th:selected="${!quiz.published}">
-                            No
-                        </option>
+                        <option value="false" selected>No</option>
                     </select>
+                    <small class="text-danger">
+                        ⚠️ Published status is "No" by default. Change to "Yes"
+                        only when quiz information is fully completed.
+                    </small>
                 </div>
 
                 <div class="form-actions">
                     <a th:href="@{/}" class="btn btn-secondary">Cancel</a>
                     <button type="submit" class="btn btn-primary">
-                        Update Quiz
+                        Save Quiz
                     </button>
                 </div>
             </form>
