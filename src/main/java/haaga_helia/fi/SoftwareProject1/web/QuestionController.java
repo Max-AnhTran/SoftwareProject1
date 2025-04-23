@@ -44,7 +44,7 @@ public class QuestionController {
         return "redirect:/quiz/" + quiz.getId() + "/questions";
     }
 
-    @GetMapping("/deletequestion/{id}")
+    @PostMapping("/deletequestion/{id}")
     public String deleteQuestion(@PathVariable("id") Long id) {
         Question question = questionRepository.findById(id).orElse(null);
         Long quizId = question.getQuiz().getId();

@@ -47,9 +47,16 @@
                             <td>
                                 <a th:href="@{/question/{id}/answers(id=${question.id})}" 
                                    class="btn btn-sm btn-warning">Edit Answers</a>
-                                <a th:href="@{/deletequestion/{id}(id=${question.id})}" 
-                                   class="btn btn-sm btn-danger"
-                                   onclick="return confirm('Delete this question?')">Delete</a>
+                                   <form th:action="@{/deletequestion/{id}(id=${question.id})}" method="post" style="display:inline;">
+                                    <button 
+                                        type="submit" 
+                                        class="btn btn-sm btn-danger"
+                                        onclick="return confirm('Delete this question?')"
+                                    >
+                                        Delete
+                                    </button>
+                                </form>
+                                
                             </td>
                         </tr>
                     </tbody>

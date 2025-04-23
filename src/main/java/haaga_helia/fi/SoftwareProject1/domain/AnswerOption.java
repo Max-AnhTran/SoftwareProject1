@@ -25,6 +25,7 @@ public class AnswerOption {
     private String content;
 
     @Column(nullable = false)
+    @JsonIgnore
     private boolean correct;
 
     @ManyToOne

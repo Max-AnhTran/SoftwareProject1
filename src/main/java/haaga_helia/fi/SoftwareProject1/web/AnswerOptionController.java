@@ -30,7 +30,7 @@ public class AnswerOptionController {
         return "redirect:/question/" + answerOption.getQuestion().getId() + "/answers";
     }
 
-    @GetMapping("/deleteanswer/{id}")
+    @PostMapping("/deleteanswer/{id}")
     public String deleteAnswer(@PathVariable("id") Long id) {
         AnswerOption answer = answerOptionRepository.findById(id).orElse(null);
         Long questionId = answer.getQuestion().getId();

@@ -72,12 +72,15 @@
                                     >
                                 </td>
                                 <td>
-                                    <a
-                                        th:href="@{/deleteanswer/{id}(id=${answer.id})}"
-                                        class="btn btn-sm btn-danger"
-                                        onclick="return confirm('Delete this answer?')"
-                                        >Delete</a
-                                    >
+                                    <form th:action="@{/deleteanswer/{id}(id=${answer.id})}" method="post" style="display:inline;">
+                                        <button 
+                                            type="submit" 
+                                            class="btn btn-sm btn-danger"
+                                            onclick="return confirm('Delete this answer?')"
+                                        >
+                                            Delete
+                                        </button>
+                                    </form>                                 
                                 </td>
                             </tr>
                         </tbody>
