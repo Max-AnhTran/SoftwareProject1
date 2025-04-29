@@ -1,0 +1,21 @@
+/* global.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Base resets & typography */
+body {
+  @apply bg-gray-50 text-gray-800 font-sans antialiased;
+}
+
+/* Headings */
+h1, h2, h3 {
+  @apply text-gray-900;
+}
+
+/* Link reset */
+a {
+  @apply transition-colors;
+}
+
+
