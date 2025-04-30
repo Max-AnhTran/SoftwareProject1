@@ -17,6 +17,9 @@ interface Quiz {
 const QuizListPage: React.FC = () => {
   const [quizzes, setQuizzes] = useState<Quiz[]>([]);
 
+// check the link if /quizzes => /api/quizzes/published
+// check link if /quizzes/category/:id => /api/quizzes/published/category/:id
+
   useEffect(() => {
     fetch('/api/quizzes/published')
       .then(res => res.json())

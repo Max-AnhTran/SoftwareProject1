@@ -18,6 +18,8 @@ const QuizDetailPage: React.FC = () => {
   const [selected, setSelected] = useState<Record<number, number | undefined>>({});
   const [feedback, setFeedback] = useState<Record<number, string>>({});
 
+// separate the fetch and use the async await function format
+
   useEffect(() => {
     fetch(`http://localhost:8080/api/quizzes/${id}/questions`)
       .then(res => res.json())
@@ -78,7 +80,7 @@ const QuizDetailPage: React.FC = () => {
           to={`/quizzes/${id}/results`}
           className="px-4 py-2 bg-secondary-600 text-white rounded-lg hover:bg-secondary-700 transition"
         >
-          View Results
+          Statistics For All Results
         </Link>
         <Link
           to={`/quizzes/${id}/reviews`}

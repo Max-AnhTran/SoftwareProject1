@@ -10,6 +10,8 @@ const features = [
   { img: '/Astronaut.png', label: 'Reach New Heights' },
 ];
 
+// Add the cards for the categories that go to the QuizListPage with all quizzes in that category
+
 const HomePage: React.FC = () => {
   const currentYear = new Date().getFullYear();
 
