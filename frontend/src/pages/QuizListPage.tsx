@@ -9,8 +9,9 @@ interface Category {
 
 interface Quiz {
   id: number;
-  title: string;
+  name: string;
   description: string;
+  courseCode: string;
   category: Category;
 }
 
@@ -21,27 +22,41 @@ const QuizListPage: React.FC = () => {
 // check link if /quizzes/category/:id => /api/quizzes/published/category/:id
 
   useEffect(() => {
-    fetch('/api/quizzes/published')
-      .then(res => res.json())
-      .then((data: Quiz[]) => setQuizzes(data));
+    const fetchQuizzes = async () => {
+      try {
+        const res = await fetch('/api/quizzes/published');
+        if (!res.ok) throw new Error(`Failed to fetch: ${res.status}`);
+        const data: Quiz[] = await res.json();
+        setQuizzes(data);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    fetchQuizzes();
   }, []);
 
   return (
-    <div className="relative">
+    <div className="p-6 max-w-6xl mx-auto">
       <h1 className="text-3xl font-bold mb-6 text-gray-800">Available Quizzes</h1>
       <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {quizzes.map(q => (
+        {quizzes.map((q) => (
           <li
             key={q.id}
             className="bg-white rounded-2xl p-6 shadow hover:shadow-lg transform hover:-translate-y-1 transition"
           >
             {/* Category Badge */}
-            <span className="inline-block mb-2 px-3 py-1 text-sm font-medium text-blue-600 bg-blue-100 rounded-full">
+            <span className="inline-block mb-2 mr-2 px-3 py-1 text-sm font-medium text-blue-600 bg-blue-100 rounded-full">
               {q.category.name}
             </span>
 
+            {/* Course Badge */}
+            <span className="inline-block mb-2 px-3 py-1 text-sm font-medium text-green-600 bg-green-100 rounded-full">
+              {q.courseCode}
+            </span>
+
             {/* Title & Description */}
-            <h2 className="text-xl font-semibold mb-2">{q.title}</h2>
+            <h2 className="text-xl font-semibold mb-2">{q.name}</h2>
             <p className="text-gray-600 mb-4">{q.description}</p>
 
             {/* Take Quiz Button */}
@@ -69,6 +84,7 @@ const QuizListPage: React.FC = () => {
 };
 
 export default QuizListPage;
+
 
 
 

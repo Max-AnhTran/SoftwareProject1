@@ -4,6 +4,7 @@ import { Routes, Route, Link, Navigate } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import QuizListPage from './pages/QuizListPage';
 import QuizDetailPage from './pages/QuizDetailPage';
+import QuizzesByCategoryPage from './pages/QuizzesByCategoryPage';
 import QuizResultsPage from './pages/QuizResultsPage';
 import QuizReviewPage from './pages/QuizReviewPage';
 
@@ -29,7 +30,7 @@ const App: React.FC = () => (
             to="/quizzes"
             className="px-4 py-2 rounded-lg font-semibold text-white uppercase hover:bg-blue-700 transition"
           >
-            Quizzes
+            ALL QUIZZES
           </Link>
         </nav>
       </div>
@@ -42,6 +43,7 @@ const App: React.FC = () => (
         <Route path="/quizzes" element={<QuizListPage />} />
         <Route path="/quizzes/category/:id" element={<QuizListPage />} />
         <Route path="/quizzes/:id" element={<QuizDetailPage />} />
+        <Route path="/categories/:id" element={<QuizzesByCategoryPage />} />
         <Route path="/quizzes/:id/results" element={<QuizResultsPage />} />
         <Route path="/quizzes/:id/reviews" element={<QuizReviewPage />} />
         <Route path="*" element={<Navigate to="/" />} />
