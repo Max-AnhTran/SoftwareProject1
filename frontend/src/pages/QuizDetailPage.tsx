@@ -126,14 +126,9 @@ const QuizDetailPage: React.FC = () => {
           to="/quizzes"
           className="inline-block mt-4 px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-100 transition"
         >
-          Statistics For All Results
+          ⬅ Back to Quizzes
         </Link>
-        <Link
-          to={`/quizzes/${id}/reviews`}
-          className="px-4 py-2 border border-secondary-600 text-secondary-600 rounded-lg hover:bg-secondary-50 transition"
-        >
-          Review Quiz
-        </Link>
+
       </div>
 
       {/* Right: Pie Chart */}
