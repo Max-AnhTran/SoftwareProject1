@@ -9,8 +9,14 @@ import org.springframework.web.bind.annotation.*;
 import haaga_helia.fi.SoftwareProject1.domain.*;
 import haaga_helia.fi.SoftwareProject1.domain.dto.*;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+
 @RestController
 @RequestMapping("/api/quizzes/{quizId}/results")
+@Tag(name = "Quiz Results API", description = "Operations related to quiz result statistics")
 public class QuizResultsRestController {
     @Autowired
     private QuizRepository quizRepo;
@@ -21,6 +27,11 @@ public class QuizResultsRestController {
 
     // GET /api/quizzes/{quizId}/results
     @GetMapping
+    @Operation(summary = "Get quiz result statistics", description = "Returns statistics including total submissions, correctness percentage, and question-level stats for a specific quiz.")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Successfully retrieved quiz results"),
+        @ApiResponse(responseCode = "404", description = "Quiz not found")
+    })
     public ResponseEntity<QuizResultsDTO> getResults(@PathVariable Long quizId) {
         if (!quizRepo.existsById(quizId)) {
             return ResponseEntity.notFound().build();
