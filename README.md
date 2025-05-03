@@ -7,7 +7,7 @@ https://software-project-1-quiz-teacher-application-postgres.2.rahtiapp.fi/
 ### Flinga feedback board
 https://edu.flinga.fi/s/EZ8U9D3
 
-## REST API Swagger documentation
+### REST API Swagger documentation
 http://software-project-1-quiz-teacher-application-postgres.2.rahtiapp.fi/swagger-ui/index.html
 
 # Quizzer
