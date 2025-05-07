@@ -4,9 +4,11 @@ https://github.com/users/zerogero/projects/1
 ### Deployed quiz management site
 https://software-project-1-quiz-teacher-application-postgres.2.rahtiapp.fi/
 
-### Flinga feedback board
+### Spring 1 Review
 https://edu.flinga.fi/s/EZ8U9D3
 
+### Spring 2 Review
+https://edu.flinga.fi/s/EWEKZG8
 # Quizzer
 
 **Quizzer** is a full-stack web application developed to help teachers create, manage, and share quizzes with their students. It enhances learning by providing interactive multiple-choice quizzes related to various course topics.
