@@ -99,9 +99,6 @@ This section provides instructions for developers to set up and start the backen
 
 ---
 
-Bạn có muốn mình giúp cập nhật trực tiếp nội dung này vào file README đã viết trước đó không?
-
-
 ## Data Model
 
 ### Category
