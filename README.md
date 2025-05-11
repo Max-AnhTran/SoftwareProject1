@@ -171,12 +171,13 @@ This section provides instructions for developers to set up and start the backen
 * `id`: Unique identifier
 * `author`: Student name
 * `content`: Text review
+* `rating`: Rating score
 * `createdAt`: Time of review
 
 **Relationships:**
 * Belongs to one quiz (Many-to-One)
 
-![ER Diagram](https://www.mermaidchart.com/raw/32964988-49c0-4c6c-8eb9-6f27ff4c95ba?theme=light&version=v0.1&format=svg)
+![ER Diagram](https://www.mermaidchart.com/raw/1d68d5bc-9248-4867-a6ca-1179e94edbdb?theme=light&version=v0.1&format=svg)
 
 ## Team Members
 - [Ezza Jalal](https://github.com/EzzaJalal)
