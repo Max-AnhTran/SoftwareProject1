@@ -46,6 +46,71 @@ The platform consists of two dashboards:
 - Database: PostgreSQL
 - Hosting:
 
+## Data Model
+
+### Category
+**Purpose:** Organizes quizzes under different subjects or themes.
+**Attributes:**
+* `id`: Unique identifier
+* `name`: Category name (e.g., "Math")
+* `description`: Optional explanation
+**Relationships:**
+* One category has many quizzes (One-to-Many)
+
+### Quiz
+**Purpose:** Represents a quiz created by a teacher.
+**Attributes:**
+* `id`: Unique identifier
+* `name`: Quiz title
+* `description`: Summary or topic explanation
+* `courseCode`: Related course
+* `published`: Boolean for visibility
+**Relationships:**
+* Belongs to one category (Many-to-One)
+* Has many questions (One-to-Many)
+* Receives many reviews (One-to-Many)
+* Records many answer submissions (One-to-Many)
+
+### Question
+**Purpose:** A question in a quiz.
+**Attributes:**
+* `id`: Unique identifier
+* `content`: Text of the question
+* `difficulty`: Enum value (EASY, NORMAL, HARD)
+**Relationships:**
+* Belongs to one quiz (Many-to-One)
+* Has many answer options (One-to-Many)
+* Relates to many answer submissions (One-to-Many)
+
+### AnswerOption
+**Purpose:** Represents a possible answer to a question.
+**Attributes:**
+* `id`: Unique identifier
+* `content`: Text of the answer
+* `correct`: Boolean flag
+**Relationships:**
+* Belongs to one question (Many-to-One)
+
+### AnswerSubmission
+**Purpose:** A student’s submitted answer to a question.
+**Attributes:**
+* `id`: Unique identifier
+* `correct`: Boolean if the answer was right
+* `submittedAt`: Time of submission
+**Relationships:**
+* Belongs to one quiz (Many-to-One)
+* Belongs to one question (Many-to-One)
+
+### Review
+**Purpose:** A student’s written review of a quiz.
+**Attributes:**
+* `id`: Unique identifier
+* `author`: Student name
+* `content`: Text review
+* `createdAt`: Time of review
+**Relationships:**
+* Belongs to one quiz (Many-to-One)
+
 ![ER Diagram](https://www.mermaidchart.com/raw/32964988-49c0-4c6c-8eb9-6f27ff4c95ba?theme=light&version=v0.1&format=svg)
 
 ## Team Members
