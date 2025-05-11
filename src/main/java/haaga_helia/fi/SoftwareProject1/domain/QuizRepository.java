@@ -13,4 +13,5 @@ public interface QuizRepository extends JpaRepository<Quiz, Long> {
     List<Quiz> findAllByOrderByCategory_NameAsc();
     List<Quiz> findByCategoryId(Long categoryId);
     Quiz findByCourseCodeAndPublished(String courseCode, boolean b);
+    List<Quiz> findByCategoryAndPublished(Category category, boolean published);
 }
