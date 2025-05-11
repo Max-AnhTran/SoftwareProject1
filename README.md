@@ -46,48 +46,7 @@ The platform consists of two dashboards:
 - Database: PostgreSQL
 - Hosting:
 
-### ER Diagram
-erDiagram
-    CATEGORY ||--o{ QUIZ : contains
-    QUIZ ||--o{ QUESTION : has
-    QUESTION ||--o{ ANSWEROPTION : provides
-    QUIZ ||--o{ REVIEW : receives
-    QUIZ ||--o{ ANSWERSUBMISSION : records
-    QUESTION ||--o{ ANSWERSUBMISSION : asked_in
-
-    CATEGORY {
-        int id
-        string name
-        string description
-    }
-    QUIZ {
-        int id
-        string name
-        string description
-        string courseCode
-        boolean published
-    }
-    QUESTION {
-        int id
-        string content
-        enum difficulty
-    }
-    ANSWEROPTION {
-        int id
-        string content
-        boolean correct
-    }
-    REVIEW {
-        int id
-        string author
-        string content
-        datetime createdAt
-    }
-    ANSWERSUBMISSION {
-        int id
-        boolean correct
-        datetime submittedAt
-    }
+![ER Diagram](https://www.mermaidchart.com/raw/32964988-49c0-4c6c-8eb9-6f27ff4c95ba?theme=light&version=v0.1&format=svg)
 
 ## Team Members
 - [Ezza Jalal](https://github.com/EzzaJalal)
