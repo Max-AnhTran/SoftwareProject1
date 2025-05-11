@@ -9,7 +9,7 @@ public class WebSecurityConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/api/**")
-                .allowedOrigins("http://localhost:5173") // ← allow your React dev server
+                .allowedOrigins("http://localhost:5173", "https://software-project-1-quiz-student.onrender.com/") // ← allow your React dev server
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                 .allowedHeaders("*")
                 .allowCredentials(false); // set true if you send cookies
