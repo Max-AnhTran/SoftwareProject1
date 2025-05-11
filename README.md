@@ -46,6 +46,62 @@ The platform consists of two dashboards:
 - Database: PostgreSQL
 - Hosting:
 
+## Developer Guide
+
+This section provides instructions for developers to set up and start the backend application via the command line.
+
+### Requirements
+
+* **Java Version:** Java 17
+* **Build Tool:** Maven (comes bundled with Spring Boot CLI or can be installed separately)
+* **JDK Installation:** Make sure `JAVA_HOME` is set correctly in your environment variables.
+
+### Steps to Run the Backend Application
+
+1. **Clone the Repository**
+
+   ```bash
+   git clone https://github.com/Max-AnhTran/SoftwareProject1.git
+   cd SoftwareProject1
+   ```
+
+2. **Build the Application**
+
+   Use Maven to compile and package the application:
+
+   ```bash
+   mvn clean install
+   ```
+
+3. **Run the Application**
+
+   Start the Spring Boot application using Maven:
+
+   ```bash
+   mvn spring-boot:run
+   ```
+
+4. **Verify It's Running**
+
+   After successful startup, the backend should be running on:
+
+   ```
+   http://localhost:8080
+   ```
+
+5. **Access API Documentation**
+
+   Open your browser and go to:
+
+   ```
+   http://localhost:8080/swagger-ui/index.html
+   ```
+
+---
+
+Bạn có muốn mình giúp cập nhật trực tiếp nội dung này vào file README đã viết trước đó không?
+
+
 ## Data Model
 
 ### Category
