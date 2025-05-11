@@ -65,6 +65,7 @@ public class ReviewRestController {
         return reviewRepo.findById(reviewId).map(r -> {
             r.setAuthor(updated.getAuthor());
             r.setContent(updated.getContent());
+            r.setRating(updated.getRating());
             return ResponseEntity.ok(reviewRepo.save(r));
         }).orElse(ResponseEntity.notFound().build());
     }

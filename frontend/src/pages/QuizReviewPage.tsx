@@ -5,6 +5,7 @@ interface Review {
     id: number;
     author: string;
     content: string;
+    rating: number;
 }
 
 const QuizReviewPage: React.FC = () => {
@@ -12,6 +13,7 @@ const QuizReviewPage: React.FC = () => {
     const [reviews, setReviews] = useState<Review[]>([]);
     const [author, setAuthor] = useState("");
     const [content, setContent] = useState("");
+    const [rating, setRating] = useState<number | null>(null);
     const [editingId, setEditingId] = useState<number | null>(null);
 
     const fetchReviews = async () => {
@@ -34,6 +36,7 @@ const QuizReviewPage: React.FC = () => {
         setEditingId(null);
         setAuthor("");
         setContent("");
+        setRating(null);
     };
 
     const handleSubmit = async (e: React.FormEvent) => {
@@ -46,7 +49,7 @@ const QuizReviewPage: React.FC = () => {
             const res = await fetch(endpoint, {
                 method,
                 headers: {"Content-Type": "application/json"},
-                body: JSON.stringify({author, content}),
+                body: JSON.stringify({author, content, rating}),
             });
             if (!res.ok) throw new Error(`HTTP ${res.status}`);
             const updated: Review = await res.json();
@@ -82,6 +85,27 @@ const QuizReviewPage: React.FC = () => {
                     rows={4}
                     required
                 />
+                <div className="">
+                    <label className=" text-gray-600">
+                        Rating (1-5):
+                        <input
+                            type="number"
+                            min="1"
+                            max="5"
+                            value={rating ?? ""}
+                            onChange={(e) => {
+                                const value = parseInt(e.target.value);
+                                if (value >= 1 && value <= 5) {
+                                    setRating(value);
+                                } else {
+                                    setRating(null);
+                                }
+                            }}
+                            className="ml-2 border-gray-200 rounded-lg p-2 focus:ring-primary-500 focus:border-primary-500"
+                            required
+                        />
+                    </label>
+                </div>
                 <div className="flex space-x-4">
                     <button
                         type="submit"
@@ -103,7 +127,20 @@ const QuizReviewPage: React.FC = () => {
                 {reviews.map((r) => (
                     <div key={r.id} className="bg-gray-50 p-5 rounded-2xl shadow flex justify-between">
                         <div>
-                            <p className="font-medium">{r.author}</p>
+                            <div className="flex gap-2 items-center">
+                                <p className="font-medium">{r.author}</p>
+                                {r.rating && (
+                                    <span className="text-yellow-500">
+                                        {Array(r.rating)
+                                            .fill(0)
+                                            .map((_, i) => (
+                                                <span key={i} className="text-orange-400">
+                                                    ★
+                                                </span>
+                                            ))}
+                                    </span>
+                                )}
+                            </div>
                             <p className="text-gray-700">{r.content}</p>
                         </div>
                         <div className="flex space-x-3">
@@ -112,6 +149,7 @@ const QuizReviewPage: React.FC = () => {
                                     setEditingId(r.id);
                                     setAuthor(r.author);
                                     setContent(r.content);
+                                    setRating(r.rating);
                                 }}
                                 className="text-blue-600 hover:text-blue-700"
                             >

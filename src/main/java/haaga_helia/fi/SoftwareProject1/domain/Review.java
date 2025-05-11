@@ -5,6 +5,8 @@ import java.time.LocalDateTime;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 
 @Entity
@@ -29,16 +31,22 @@ public class Review {
     @Column(nullable = false, length = 2000)
     private String content;
 
+    @Min(1)
+    @Max(5)
+    @Column(nullable = false)
+    private int rating;
+
     @Column(nullable = false)
     private LocalDateTime createdAt = LocalDateTime.now();
 
     public Review() {
     }
 
-    public Review(Quiz quiz, String author, String content) {
+    public Review(Quiz quiz, String author, String content, int rating) {
         this.quiz = quiz;
         this.author = author;
         this.content = content;
+        this.rating = rating;
     }
 
     // Getters & setters
@@ -69,6 +77,17 @@ public class Review {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public int getRating() {
+        return rating;
+    }
+
+    public void setRating(int rating) {
+        if (rating < 1 || rating > 5) {
+            throw new IllegalArgumentException("Rating must be between 1 and 5");
+        }
+        this.rating = rating;
     }
 
     public LocalDateTime getCreatedAt() {

@@ -14,7 +14,8 @@ public class DatabaseLoader {
             QuizRepository quizRepository,
             QuestionRepository questionRepository,
             AnswerOptionRepository answerOptionRepository,
-            CategoryRepository categoryRepository) {
+            CategoryRepository categoryRepository,
+            ReviewRepository reviewRepository) {
         return (args) -> {
             if (quizRepository.count() == 0) {
                 // ========== CREATE CATEGORIES ==========
@@ -39,6 +40,11 @@ public class DatabaseLoader {
                 algebraQuiz.setPublished(true);
                 algebraQuiz.setCategory(math);
                 quizRepository.save(algebraQuiz);
+
+                // ========== CREATE REVIEWS ==========
+                Review review1 = new Review(javaQuiz, "Alice", "Great quiz!", 5);
+                Review review2 = new Review(algebraQuiz, "Bob", "Too easy!", 3);
+                reviewRepository.saveAll(List.of(review1, review2));  
 
                 // ========== CREATE QUESTIONS ==========
                 // Questions for Java Quiz
