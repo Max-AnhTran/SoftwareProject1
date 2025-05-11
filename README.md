@@ -4,6 +4,9 @@ https://github.com/users/zerogero/projects/1
 ### Deployed quiz management site
 https://software-project-1-quiz-teacher-application-postgres.2.rahtiapp.fi/
 
+### Deployed quiz application for students
+https://software-project-1-quiz-teacher-application-postgres.2.rahtiapp.fi/
+
 ### Spring 1 Review
 https://edu.flinga.fi/s/EZ8U9D3
 
