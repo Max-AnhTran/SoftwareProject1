@@ -16,6 +16,7 @@ import java.util.Optional;
 @RequestMapping("/api/answers")
 @Tag(name = "Answer Submissions", description = "Endpoints for submitting answers to quiz questions")
 public class AnswerSubmissionRestController {
+
     @Autowired
     private QuizRepository quizRepo;
 
@@ -28,7 +29,6 @@ public class AnswerSubmissionRestController {
     @Autowired
     private AnswerSubmissionRepository submissionRepo;
 
-    // DTO to receive JSON from frontend
     public static class AnswerRequest {
         public Long quizId;
         public Long questionId;
@@ -36,31 +36,46 @@ public class AnswerSubmissionRestController {
     }
 
     @PostMapping("/submit")
-    @Operation(
-        summary = "Submit answer for a quiz question",
-        description = "Submits a selected answer option for a given quiz and question. Returns whether the answer is correct."
-    )
+    @Operation(summary = "Submit answer for a quiz question", description = "Submits a selected answer option for a given quiz and question. Returns whether the answer is correct.")
     @ApiResponses(value = {
-        @ApiResponse(responseCode = "200", description = "Answer submitted successfully"),
-        @ApiResponse(responseCode = "400", description = "Invalid quiz, question, or answer option")
+            @ApiResponse(responseCode = "200", description = "Answer submitted successfully"),
+            @ApiResponse(responseCode = "400", description = "Invalid quiz, question, or answer option")
     })
     public ResponseEntity<?> submitAnswer(@RequestBody AnswerRequest request) {
-        Optional<Quiz> quizOpt = quizRepo.findById(request.quizId);
-        Optional<Question> questionOpt = questionRepo.findById(request.questionId);
-        Optional<AnswerOption> selectedAnswerOpt = answerRepo.findById(request.answerOptionId);
-
-        if (quizOpt.isEmpty() || questionOpt.isEmpty() || selectedAnswerOpt.isEmpty()) {
-            return ResponseEntity.badRequest().body("Invalid quiz, question, or answer option");
+        // 1) All IDs must be non-null
+        if (request.quizId == null || request.questionId == null || request.answerOptionId == null) {
+            return ResponseEntity.badRequest().body("quizId, questionId and answerOptionId must be provided");
         }
 
-        AnswerOption selectedAnswer = selectedAnswerOpt.get();
-        boolean isCorrect = selectedAnswer.getCorrect();
+        // 2) Quiz must exist and be published
+        Optional<Quiz> quizOpt = quizRepo.findById(request.quizId);
+        if (quizOpt.isEmpty() || !quizOpt.get().isPublished()) {
+            return ResponseEntity.badRequest().body("Quiz not found or not published");
+        }
 
-        // Save submission
-        AnswerSubmission submission = new AnswerSubmission(quizOpt.get(), questionOpt.get(), isCorrect);
+        // 3) Question must exist
+        Optional<Question> questionOpt = questionRepo.findById(request.questionId);
+        if (questionOpt.isEmpty()) {
+            return ResponseEntity.badRequest().body("Question not found");
+        }
+
+        // 4) AnswerOption must exist
+        Optional<AnswerOption> selectedAnswerOpt = answerRepo.findById(request.answerOptionId);
+        if (selectedAnswerOpt.isEmpty()) {
+            return ResponseEntity.badRequest().body("Answer option not found");
+        }
+
+        // 5) Evaluate correctness
+        boolean isCorrect = selectedAnswerOpt.get().getCorrect();
+
+        // 6) Persist
+        AnswerSubmission submission = new AnswerSubmission(
+                quizOpt.get(),
+                questionOpt.get(),
+                isCorrect);
         submissionRepo.save(submission);
 
-        // Return result to frontend
-        return ResponseEntity.ok().body(Map.of("correct", isCorrect));
+        // 7) Return JSON { "correct": true/false }
+        return ResponseEntity.ok(Map.of("correct", isCorrect));
     }
 }
