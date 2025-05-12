@@ -41,9 +41,8 @@ public class Quiz {
     @OneToMany(mappedBy = "quiz", cascade = CascadeType.ALL)
     private List<Question> questions;
 
-    // @OneToMany(mappedBy = "quiz", cascade = CascadeType.ALL)
-    // @JsonIgnore
-    // private List<Review> reviews;
+    @OneToMany(mappedBy = "quiz", cascade = CascadeType.ALL)
+    private List<Review> reviews;
 
     @Override
     public String toString() {
