@@ -97,6 +97,14 @@ This section provides instructions for developers to set up and start the backen
    http://localhost:8080/swagger-ui/index.html
    ```
 
+### Running tests
+
+To run all tests from the command line, use:
+
+```bash
+./mvnw test
+```
+
 ---
 
 ## Data Model
