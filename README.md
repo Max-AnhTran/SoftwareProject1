@@ -104,6 +104,7 @@ To run all tests from the command line, use:
 ```bash
 ./mvnw test
 ```
+Alternatively, you can run the tests from your IDE by right-clicking the `src/test/java` folder and choosing **Run Tests**.
 
 ---
 
@@ -186,6 +187,9 @@ To run all tests from the command line, use:
 * Belongs to one quiz (Many-to-One)
 
 ![ER Diagram](https://www.mermaidchart.com/raw/1d68d5bc-9248-4867-a6ca-1179e94edbdb?theme=light&version=v0.1&format=svg)
+
+## License
+This project is licensed under the [MIT License](./LICENSE).
 
 ## Team Members
 - [Ezza Jalal](https://github.com/EzzaJalal)
