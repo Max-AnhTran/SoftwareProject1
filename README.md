@@ -7,10 +7,10 @@ https://software-project-1-quiz-teacher-application-postgres.2.rahtiapp.fi/
 ### Deployed quiz application for students
 https://software-project-1-quiz-student.onrender.com/
 
-### Spring 1 Review
+### Sprint 1 Review
 https://edu.flinga.fi/s/EZ8U9D3
 
-### Spring 2 Review
+### Sprint 2 Review
 https://edu.flinga.fi/s/EWEKZG8
 
 ### REST API Swagger documentation
